@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class MusicSearch extends Activity {
@@ -30,7 +31,12 @@ public class MusicSearch extends Activity {
         Intent intent=getIntent();
         String artistName = intent.getStringExtra(MainActivity.URL);
         Log.d("Error","Checkpoint2");
-        name=artistName;
+        try {
+            name = URLEncoder.encode(artistName, "utf-8");;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         String finalURL=url+name;
         Log.d("Error","Checkpoint3");
         getDetails(finalURL);
